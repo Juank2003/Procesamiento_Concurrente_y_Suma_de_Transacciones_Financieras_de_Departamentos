@@ -1,7 +1,4 @@
 // El lanzador controlara el flujo de la aplicación, lanzando un proceso Procesador Contabilidad para cada archivo de entrada y luego agregando los resultados en un archivo de salida.
-// Autor: Diego Revuelta (diegorevuelta.com)
-// Fecha: 2016-06-05
-// Licencia: GPL v3
 
 
 import java.io.FileWriter;
@@ -25,6 +22,7 @@ public class Lanzador {
             try {
                 thread.join();
             } catch (InterruptedException e) {
+                // Manejar interrupciones de hilos de manera adecuada aquí
                 e.printStackTrace();
             }
         }
@@ -36,6 +34,7 @@ public class Lanzador {
         try (PrintWriter pw = new PrintWriter(new FileWriter("Resultado_global.txt"))) {
             pw.println(sumaGlobal);
         } catch (IOException e) {
+            // Manejar excepciones de escritura de manera adecuada aquí
             e.printStackTrace();
         }
     }

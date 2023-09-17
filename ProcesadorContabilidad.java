@@ -15,11 +15,16 @@ public class ProcesadorContabilidad implements Runnable {
         try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
             String linea;
             while ((linea = br.readLine()) != null) {
-                long transaccion = Long.parseLong(linea);
-                sumaDepartamento += transaccion;
+                try {
+                    long transaccion = Long.parseLong(linea);
+                    sumaDepartamento += transaccion;
+                } catch (NumberFormatException e) {
+                    // Manejar excepciones de formato de manera adecuada aquí
+                    e.printStackTrace();
+                }
             }
-        } catch (IOException | NumberFormatException e) {
-            // Manejar excepciones de lectura y formato aquí
+        } catch (IOException e) {
+            // Manejar excepciones de lectura de manera adecuada aquí
             e.printStackTrace();
         }
 
@@ -28,7 +33,7 @@ public class ProcesadorContabilidad implements Runnable {
         try (PrintWriter pw = new PrintWriter(new FileWriter(resultadoArchivo))) {
             pw.println(sumaDepartamento);
         } catch (IOException e) {
-            // Manejar excepciones de escritura aquí
+            // Manejar excepciones de escritura de manera adecuada aquí
             e.printStackTrace();
         }
     }
